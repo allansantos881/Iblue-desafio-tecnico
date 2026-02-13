@@ -74,15 +74,24 @@ Arquivos principais do repositório:
 - Cards: Customers, All Sinister, Overall Claims Rate
 - Comparação de taxa por **Age** e **Driving Experience**
 
+<img width="954" height="526" alt="1" src="https://github.com/user-attachments/assets/9f3d0d97-c572-4a23-b632-51ef4fcef2b2" />
+
+
 ### Página 2 — Risk Drivers
 - Heatmap: **Driving Experience x Past Accidents** (taxa de sinistro)
 - Análises por Speeding Violations e outros drivers (com filtros)
+
+<img width="952" height="526" alt="2" src="https://github.com/user-attachments/assets/eb5ed22d-7459-4464-bee4-d1df86598956" />
+
 
 ### Página 3 — Recomendações
 - Ação 1: Ajuste de prêmio por experiência
 - Ação 2: Integração do score na precificação
 - Ação 3: Incentivo a baixa quilometragem (produto baseado em uso)
 - Ação 4: Reavaliar uso de histórico isolado (multas/acidentes)
+
+<img width="950" height="527" alt="3" src="https://github.com/user-attachments/assets/f8b236f6-920f-4d81-9a37-295df5cf4b1f" />
+
 
 ---
 
