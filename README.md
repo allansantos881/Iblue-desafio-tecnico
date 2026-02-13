@@ -1,154 +1,145 @@
 # Car Insurance Risk Analysis
 
-Análise exploratória, dashboard e modelo interpretável aplicados ao dataset **Car Insurance Data (Kaggle)**.
+Análise exploratória (EDA), dashboard e modelo interpretável aplicados ao dataset **Car Insurance Data (Kaggle)**.
 
-Projeto desenvolvido como parte de teste técnico para posição de Analista de Dados.
+Projeto desenvolvido como parte de **teste técnico para Analista de Dados**.
 
 ---
 
 ## Objetivo
 
-Analisar a taxa de sinistro (`outcome`) e identificar fatores associados a maior risco, com foco em:
+Analisar a taxa de sinistro (`outcome`) e identificar fatores associados a maior risco, apoiando:
 
 - Segmentação de clientes
-- Apoio à precificação
-- Insights estratégicos para underwriting
-- Construção de modelo interpretável
+- Precificação
+- Underwriting
+- Recomendações acionáveis
+- Modelo interpretável (bônus)
 
 ---
 
-## 📂 Estrutura do Projeto
-📄 Teste_Técnico_Analista_de_Dados.ipynb
-📄 Car_Insurance_Claim.csv
-📄 Car Insurance Dashboard.pbix
-📄 README.md
-📄 car_insurance_tratado.csv
+## Estrutura do Projeto
 
+Arquivos principais do repositório:
 
-- `notebooks/` → EDA + Modelagem bônus
-- `car_insurance_tratado.csv` → dataset final tratado
-- `dashboard/` → arquivos Power BI
-- `README.md` → documentação do projeto
+- `Teste_Técnico_Analista_de_Dados.ipynb` → EDA + Modelagem bônus
+- `Car_Insurance_Claim.csv` → dataset original
+- `car_insurance_tratado.csv` → dataset tratado para Power BI
+- `Car Insurance Dashboard.pbix` → dashboard Power BI
+- `README.md` → documentação
 
 ---
 
-## 🔎 Parte A — EDA
+## Parte A — EDA
 
 ### ✔ Auditoria de Dados
-- Verificação de tipos
-- Missing values (~10% em credit_score e annual_mileage)
-- Duplicados (não encontrados)
-- Outliers (valores plausíveis mantidos)
-- Balanceamento de classes (31% sinistros)
+- Tipos de dados e consistência
+- Missing values (~10% em `credit_score` e `annual_mileage`)
+- Duplicados (não identificados)
+- Outliers (valores extremos plausíveis, mantidos)
+- Balanceamento de classes: **~31%** sinistros (classe 1)
 
 ### ✔ Tratamento
-- Padronização de colunas
-- Conversão de variáveis binárias
-- Imputação por mediana
-- Criação de flags de missing
-- Criação de buckets para score e quilometragem
+- Padronização de colunas (lowercase)
+- Conversão de variáveis binárias para inteiro
+- Imputação por **mediana** em `credit_score` e `annual_mileage`
+- Criação de **flags de missing** (indicadores)
+- Criação de buckets (quartis) para score e quilometragem (para análise/BI)
 
-### 📊 Principais Insights
+---
+
+## Principais Insights (quantificados)
 
 1. **Experiência é o principal driver de risco**
-   - 0–9 anos → ~63% taxa
-   - 30+ anos → <5%
+   - 0–9 anos: ~63% taxa de sinistro
+   - 30+ anos: <5%
 
-2. **Credit Score possui relação monotônica**
-   - Quartil inferior → ~55%
-   - Quartil superior → ~15%
+2. **Credit Score apresenta relação monotônica com risco**
+   - Quartil inferior: ~55%
+   - Quartil superior: ~15%
 
-3. **Quilometragem aumenta exposição ao risco**
-   - >14k milhas → ~47%
-   - <10k milhas → ~23%
+3. **Quilometragem anual aumenta exposição ao risco**
+   - >14k milhas: ~47%
+   - <10k milhas: ~23%
 
 4. **Histórico isolado (multas/acidentes) não é linear**
-   - Experiência domina efeito do histórico
+   - Quando analisado em conjunto, **experiência domina o efeito do histórico**
 
 ---
 
-## 📊 Parte B — Dashboard (Power BI)
+## Parte B — Dashboard (Power BI)
 
 ### Página 1 — Overview
-- Overall Claims Rate
-- All Sinister
-- Customers
-- Average Claims Rate by Age
-- Accident Rate (Average) by Driving Experience
-- All customers and All Sinister
+- Cards: Customers, All Sinister, Overall Claims Rate
+- Comparação de taxa por **Age** e **Driving Experience**
 
 ### Página 2 — Risk Drivers
-- Heatmap Driving Experience
-- Average Claim Rate by Speeding Violations
-- Driving Experience and Customers by Sinister
+- Heatmap: **Driving Experience x Past Accidents** (taxa de sinistro)
+- Análises por Speeding Violations e outros drivers (com filtros)
 
 ### Página 3 — Recomendações
-- Ação 1 — Ajuste de prêmio por experiência
-- Ação 2 — Integração do score na precificação
-- Ação 3 — Incentivo a baixa quilometragem
-- Ação 4 — Ajustar modelo de avaliação de histórico
+- Ação 1: Ajuste de prêmio por experiência
+- Ação 2: Integração do score na precificação
+- Ação 3: Incentivo a baixa quilometragem (produto baseado em uso)
+- Ação 4: Reavaliar uso de histórico isolado (multas/acidentes)
 
 ---
 
-## 🤖 Bônus — Modelo Interpretável
+## Bônus — Modelo Interpretável
 
-Foi utilizada **Regressão Logística** para explicar fatores associados ao risco.
+### Modelo
+- **Regressão Logística** (interpretável) para estimar probabilidade de sinistro
+- Modelo adicional: **Árvore de decisão (max_depth=4)** para visualização de regras
 
-### Métricas:
-- AUC
-- F1 Score
+### Validação
+- **AUC (Logit): 0.875**
+- F1 Score calculado no notebook (ver célula de métricas)
 
-Principais variáveis confirmadas:
+### Principais fatores confirmados pelo modelo
 - Baixa experiência
 - Baixo credit score
 - Alta quilometragem
 
-Modelo adicional:
-- Árvore de decisão (max_depth=4) para visualização interpretável
+---
+
+## Limitações do Dataset
+
+- Não há dimensão temporal (dados transversais)
+- Ausência de variáveis financeiras do seguro (prêmio, valor segurado, franquia, custo do sinistro)
+- Possível correlação entre idade e experiência (colinearidade)
+- Missing values (~10%) exigem imputação
+- Dataset público do Kaggle (pode não refletir integralmente cenários reais)
 
 ---
 
-## ⚠️ Limitações
+## Tecnologias Utilizadas
 
-- Dataset sem dimensão temporal
-- Ausência de informações financeiras (prêmio, valor segurado)
-- Possível correlação entre idade e experiência
-- Dados (Kaggle)
-
----
-
-## 🛠 Tecnologias Utilizadas
-
-- Python (Pandas, NumPy)
+- Python: Pandas, NumPy
 - Scikit-Learn
 - Matplotlib / Seaborn
 - Power BI
 
 ---
 
-## 🚀 Como Executar
+## Como Executar
 
-1. Clone o repositório
-2. Use google colab
-3. instale as dependencias
+### Notebook (Colab/Jupyter)
+1. Abra o notebook `Teste_Técnico_Analista_de_Dados.ipynb`
+2. Instale dependências (se necessário):
+   ```bash
+   pip install pandas numpy scikit-learn matplotlib seaborn
+Execute as células do notebook
 
-pip install pandas numpy scikit-learn matplotlib seaborn
+Dashboard (Power BI)
+Abra Car Insurance Dashboard.pbix
 
-3. Execute o notebook em `notebooks/`
-4. Abra o arquivo Power BI em `dashboard/`
+Caso necessário, aponte a fonte para car_insurance_tratado.csv
 
----
+👤 Autor
+Allan dos Santos
+LinkedIn: https://www.linkedin.com/in/allansantos881/
+GitHub: https://github.com/allansantos881
 
-## 👤 Autor
-
-Allan dos Santos  
-[LinkedIn] (https://www.linkedin.com/in/allansantos881/) 
-[GitHub] (https://github.com/allansantos881)
-
----
-
-## 📈 Conclusão
-
-A análise demonstra que experiência, credit score e quilometragem são os principais drivers de risco da carteira.
-
-Recomenda-se estratégia de precificação segmentada baseada nesses fatores para melhoria da sinistralidade e rentabilidade.
+Conclusão
+A análise mostra que experiência, credit score e quilometragem são os principais drivers de risco.
+Recomenda-se precificação segmentada e políticas de underwriting baseadas nesses fatores para melhorar sinistralidade e rentabilidade.
