@@ -22,7 +22,8 @@ Analisar a taxa de sinistro (`outcome`) e identificar fatores associados a maior
 
 Arquivos principais do repositório:
 
-- `Teste_Técnico_Analista_de_Dados.ipynb` → EDA + Modelagem bônus
+- `Teste_Técnico_Analista_de_Dados.ipynb` → EDA
+- `Validação (AUC + F1) - Analista de Dados.ipynb` → Modelagem bônus
 - `Car_Insurance_Claim.csv` → dataset original
 - `car_insurance_tratado.csv` → dataset tratado para Power BI
 - `Car Insurance Dashboard.pbix` → dashboard Power BI
